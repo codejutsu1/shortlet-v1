@@ -18,21 +18,21 @@
 ## Phase 0: Project Setup & Foundation
 
 ### 0.1 Project Initialization
-- [ ] Install Laravel 11.x
-- [ ] Configure environment variables (.env)
-- [ ] Set up database connection (MySQL)
-- [ ] Set up phpstan static analysis and pint
-- [ ] Install Vue.js 3 dependencies
-- [ ] Install and configure Inertia.js
-- [ ] Install Tailwind CSS
-- [ ] Install FilamentPHP 3.x for admin panel
-- [ ] Set up Vite for frontend builds
-- [ ] Configure Laravel Mix/Vite for Vue components
-- [ ] Install Laravel Sanctum for API authentication
-- [ ] Install Laravel Socialite for OAuth
-- [ ] Set up Redis for queues and cache
-- [ ] Create initial GitHub repository
-- [ ] Push initial commit to GitHub
+- [x] Install Laravel 11.x
+- [x] Configure environment variables (.env)
+- [x] Set up database connection (MySQL)
+- [x] Set up phpstan static analysis and pint
+- [x] Install Vue.js 3 dependencies
+- [x] Install and configure Inertia.js
+- [x] Install Tailwind CSS
+- [x] Install FilamentPHP 3.x for admin panel
+- [x] Set up Vite for frontend builds
+- [x] Configure Laravel Mix/Vite for Vue components
+- [x] Install Laravel Sanctum for API authentication
+- [x] Install Laravel Socialite for OAuth
+- [x] Set up Redis for queues and cache
+- [x] Create initial GitHub repository
+- [x] Push initial commit to GitHub
 
 **Git Commit**: `Initial project setup with Laravel, Vue.js, Inertia, and FilamentPHP`
 
