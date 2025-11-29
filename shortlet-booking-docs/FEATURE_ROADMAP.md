@@ -48,11 +48,11 @@
 **Git Commit**: `Configure code quality tools and linting`
 
 ### 0.3 Project Structure
-- [ ] Create frontend directory structure (components, pages, layouts)
-- [ ] Create backend directory structure (Services, Repositories, DTOs)
-- [ ] Set up shared Inertia components
-- [ ] Create base layout components
-- [ ] Set up middleware structure
+- [x] Create frontend directory structure (components, pages, layouts)
+- [x] Create backend directory structure (Services, Repositories, DTOs)
+- [x] Set up shared Inertia components
+- [x] Create base layout components
+- [x] Set up middleware structure
 
 **Git Commit**: `Set up project directory structure and base components`
 
