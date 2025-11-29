@@ -76,14 +76,16 @@
 **Git Commit**: `Add database migrations for all core tables`
 
 ### 1.2 Eloquent Models
-- [ ] Create User model with relationships
-- [ ] Create Property model with relationships
-- [ ] Create PropertyImage model
-- [ ] Create Amenity model
-- [ ] Create Booking model with relationships
-- [ ] Create Review model with relationships
-- [ ] Create Payment model with relationships
-- [ ] Add model factories for testing
+- [x] Create User model (extend default with relationships)
+- [x] Create Property model with relationships
+- [x] Create PropertyImage model
+- [x] Create Amenity model
+- [x] Create Booking model
+- [x] Create Payment model
+- [x] Create Review model
+- [x] Define all model relationships
+- [x] Add fillable fields and casts
+- [x] Add query scopes where neededsting
 - [ ] Add database seeders for development data
 
 **Git Commit**: `Create Eloquent models with relationships and factories`
