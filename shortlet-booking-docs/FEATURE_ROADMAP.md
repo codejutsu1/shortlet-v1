@@ -37,12 +37,12 @@
 **Git Commit**: `Initial project setup with Laravel, Vue.js, Inertia, and FilamentPHP`
 
 ### 0.2 Code Quality Tools
-- [ ] Install and configure PHP CS Fixer
-- [ ] Install and configure ESLint for Vue
-- [ ] Install and configure Prettier
-- [ ] Set up PHPUnit for backend testing
-- [ ] Set up Vitest for frontend testing
-- [ ] Create .editorconfig file
+- [x] Install and configure PHP CS Fixer
+- [x] Install and configure ESLint for Vue
+- [x] Install and configure Prettier
+- [x] Set up PHPUnit for backend testing
+- [x] Set up Vitest for frontend testing
+- [x] Create .editorconfig file
 - [ ] Add pre-commit hooks (optional)
 
 **Git Commit**: `Configure code quality tools and linting`
