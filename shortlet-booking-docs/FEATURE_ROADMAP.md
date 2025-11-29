@@ -61,17 +61,17 @@
 ## Phase 1: Database Schema & Models
 
 ### 1.1 Database Design
-- [ ] Review DATABASE_SCHEMA.md
-- [ ] Create users table migration (extend default Laravel users)
-- [ ] Create properties table migration
-- [ ] Create property_images table migration
-- [ ] Create amenities table migration
-- [ ] Create property_amenity pivot table migration
-- [ ] Create bookings table migration
-- [ ] Create reviews table migration
-- [ ] Create payments table migration
-- [ ] Create property_availability table migration
-- [ ] Run migrations and verify schema
+- [x] Review DATABASE_SCHEMA.md
+- [x] Create users table migration (extend default Laravel users)
+- [x] Create properties table migration
+- [x] Create property_images table migration
+- [x] Create amenities table migration
+- [x] Create property_amenity pivot table migration
+- [x] Create bookings table migration
+- [x] Create reviews table migration
+- [x] Create payments table migration
+- [x] Create property_availability table migration
+- [x] Run migrations and verify schema
 
 **Git Commit**: `Add database migrations for all core tables`
 
