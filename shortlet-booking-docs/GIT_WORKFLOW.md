@@ -55,6 +55,83 @@ We use a simplified **Git Flow** approach suitable for an MVP project.
 
 ---
 
+## Git Configuration for Simplified Push
+
+This project is configured to allow simplified push commands. The following git configurations are set:
+
+```bash
+# Push current branch to remote branch with same name
+git config push.default current
+
+# Automatically set up remote tracking for new branches
+git config push.autoSetupRemote true
+```
+
+With these settings, you can use **`git push`** without specifying remote or branch names.
+
+---
+
+## Workflow for AI Agents
+
+**IMPORTANT**: AI agents must follow this workflow when making code changes:
+
+### Before Making ANY Changes:
+
+1. **Check current branch**: Verify you're not on `main` or `develop`
+   ```bash
+   git branch --show-current
+   ```
+
+2. **Create a feature branch**: If on `main` or `develop`, create a feature branch first
+   ```bash
+   git checkout -b feature/<descriptive-name>
+   ```
+
+3. **Make your changes**: Edit files as requested
+
+4. **Commit changes**: Follow commit conventions
+   ```bash
+   git add .
+   git commit -m "feat: descriptive message"
+   ```
+
+5. **Push to remote**: Simply use `git push`
+   ```bash
+   git push
+   ```
+
+### Branch Naming for AI Agents:
+
+- **Features**: `feature/add-authentication`, `feature/property-search`
+- **Fixes**: `bugfix/booking-validation`, `fix/payment-error`
+- **Updates**: `update/dependencies`, `update/documentation`
+
+### Example Complete Workflow:
+
+```bash
+# Check current branch
+git branch --show-current
+# Output: main
+
+# Create feature branch
+git checkout -b feature/user-dashboard
+
+# Make changes to files...
+
+# Stage and commit
+git add .
+git commit -m "feat: Add user dashboard with booking history"
+
+# Push to remote (will create remote branch automatically)
+git push
+
+# Output: Branch 'feature/user-dashboard' set up to track remote branch 'feature/user-dashboard' from 'origin'.
+```
+
+**Never commit directly to `main` or `develop` branches.**
+
+---
+
 ## Workflow Steps
 
 ### 1. Starting New Work
@@ -79,8 +156,8 @@ git add .
 # Commit with a descriptive message (see commit conventions below)
 git commit -m "Add property search filtering by location and dates"
 
-# Push to remote
-git push origin feature/property-search
+# Push to remote (simplified - no need to specify remote/branch)
+git push
 ```
 
 ### 3. Keeping Your Branch Updated
@@ -224,6 +301,7 @@ git commit -m "Add property search, fix bugs, update docs, refactor code"
 - Run tests if available
 - Check for linting errors
 - check for static analysis
+
 
 ### 4. Write Meaningful Messages
 

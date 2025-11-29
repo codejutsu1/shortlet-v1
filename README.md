@@ -1,408 +1,413 @@
-# ShortletNG - Project Documentation
+# ShortletNG
 
-Welcome to the **ShortletNG** project documentation! This folder contains all the essential documentation for building a modern shortlet booking platform for the Nigerian market.
+A modern, single-host shortlet booking platform targeting the Nigerian market. Built with Laravel, Vue.js, and Inertia.js, ShortletNG provides a seamless experience for guests to discover, search, and book short-term rental properties.
 
----
-
-## Project Overview
-
-**ShortletNG** is an MVP shortlet booking platform similar to Booking.com and Hotels.ng, built with:
-- **Backend**: Laravel 11.x
-- **Frontend**: Vue.js 3 with Inertia.js
-- **Admin Panel**: FilamentPHP 3.x
-- **Styling**: Tailwind CSS
-- **Payment**: Paystack & Flutterwave (manager pattern)
-- **Target Market**: Nigeria
-
-This is a **single-host platform** where you manage all properties, and guests can browse and book seamlessly.
-
----
-
-## Documentation Index
-
-### 1. [PROJECT_OVERVIEW.md](PROJECT_OVERVIEW.md)
-**What it contains:**
-- Project description and vision
-- Complete tech stack
-- MVP feature list
-- Target market and constraints
-- Success metrics
-
-**When to read:** Start here to understand the big picture and project scope.
-
----
-
-### 2. [FEATURE_ROADMAP.md](FEATURE_ROADMAP.md) ⭐ MOST IMPORTANT
-**What it contains:**
-- Complete feature breakdown by phases
-- Detailed task lists with checkboxes
-- Progress tracking system
-- Git commit recommendations for each feature
-- Notes section for logging decisions
-
-**When to use:**
-- **Daily** - Track your progress as you build
-- Before starting any feature - Check the roadmap first
-- After completing tasks - Mark checkboxes as complete
-- Update progress percentages regularly
-
-**This is your primary working document!**
-
----
-
-### 3. [CODING_STANDARDS.md](CODING_STANDARDS.md)
-**What it contains:**
-- Laravel coding conventions
-- Vue.js style guide and component structure
-- Inertia.js best practices
-- Tailwind CSS organization
-- Naming conventions for everything
-- Code quality guidelines
-- Testing standards
-
-**When to read:**
-- Before writing any code
-- During code reviews
-- When in doubt about naming or structure
-
----
-
-### 4. [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md)
-**What it contains:**
-- Complete color palette (primary, secondary, semantic)
-- Typography specifications (fonts, sizes, weights)
-- Spacing scale
-- Component patterns (buttons, cards, forms, badges)
-- Responsive breakpoints
-- Shadow and border radius values
-- Tailwind configuration
-
-**When to use:**
-- When building any UI component
-- Before choosing colors or spacing
-- To ensure design consistency
-- Reference for Tailwind classes
-
----
-
-### 5. [DATABASE_SCHEMA.md](DATABASE_SCHEMA.md)
-**What it contains:**
-- Complete database schema with all tables
-- Entity relationship diagrams
-- Field definitions and constraints
-- Indexes and foreign keys
-- Sample queries
-- Migration order
-- Seed data requirements
-
-**When to use:**
-- Before creating migrations
-- When defining model relationships
-- When writing complex queries
-- To understand data structure
-
----
-
-### 6. [GIT_WORKFLOW.md](GIT_WORKFLOW.md)
-**What it contains:**
-- Branching strategy (feature, bugfix, hotfix)
-- Commit message conventions
-- Pull request guidelines
-- Git commands cheat sheet
-- Common scenarios and solutions
-
-**When to use:**
-- Before creating a branch
-- Before committing code
-- Before creating pull requests
-- When collaborating with others
-
----
-
-### 7. [SETUP_GUIDE.md](SETUP_GUIDE.md)
-**What it contains:**
-- Prerequisites (PHP, Composer, Node.js, MySQL, etc.)
-- Step-by-step setup instructions
-- Environment configuration
-- External service setup (Google OAuth, Paystack, Flutterwave)
-- Common issues and troubleshooting
-- Useful commands
-
-**When to use:**
-- First time setting up the project
-- When onboarding new developers
-- When encountering setup issues
-
----
-
-### 8. [TESTING_STRATEGY.md](TESTING_STRATEGY.md)
-**What it contains:**
-- Testing philosophy for MVP
-- Types of tests (unit, feature, integration)
-- Critical test cases for each feature
-- Testing best practices
-- Manual testing checklist
-- Coverage goals
-
-**When to use:**
-- When writing tests for features
-- Before releasing features
-- To understand what to test and what to skip
-
----
-
-## Quick Start Guide
-
-### For First-Time Setup:
-
-1. **Read** [PROJECT_OVERVIEW.md](PROJECT_OVERVIEW.md) - Understand the project
-2. **Follow** [SETUP_GUIDE.md](SETUP_GUIDE.md) - Set up your development environment
-3. **Review** [FEATURE_ROADMAP.md](FEATURE_ROADMAP.md) - See what needs to be built
-4. **Study** [CODING_STANDARDS.md](CODING_STANDARDS.md) and [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md) - Learn the conventions
-5. **Start building!**
-
-### Daily Workflow:
-
-1. **Check** [FEATURE_ROADMAP.md](FEATURE_ROADMAP.md) - Pick next task
-2. **Review** [DATABASE_SCHEMA.md](DATABASE_SCHEMA.md) - If working with database
-3. **Reference** [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md) - When building UI
-4. **Follow** [CODING_STANDARDS.md](CODING_STANDARDS.md) - While writing code
-5. **Commit** using [GIT_WORKFLOW.md](GIT_WORKFLOW.md) - When done
-6. **Update** [FEATURE_ROADMAP.md](FEATURE_ROADMAP.md) - Mark tasks complete
-
----
-
-## Project Phases
-
-The project is divided into phases (see FEATURE_ROADMAP.md for details):
-
-- **Phase 0**: Project Setup & Foundation
-- **Phase 1**: Database Schema & Models
-- **Phase 2**: Authentication System
-- **Phase 3**: Admin Panel (FilamentPHP)
-- **Phase 4**: Property Discovery (Frontend)
-- **Phase 5**: Booking System
-- **Phase 6**: Payment Integration
-- **Phase 7**: Reviews & Ratings
-- **Phase 8**: Email Notifications
-- **Phase 9**: Polish & Testing
-- **Phase 10**: Deployment
-
----
-
-## Key Features
+## Features
 
 ### Guest Features
-✅ Google OAuth & email/password authentication
-✅ Property search with filters (location, dates, price, amenities)
-✅ Property detail pages with image galleries
-✅ Booking system with availability checking
-✅ Secure payment processing (Paystack/Flutterwave)
-✅ Booking history and management
-✅ Reviews and ratings after checkout
+- **Authentication & Authorization**
+  - Google OAuth integration for quick signup/login
+  - Traditional email/password authentication as fallback
+  - Secure user profile management
+
+- **Property Discovery**
+  - Advanced search with multiple filters (location, dates, price, amenities)
+  - Interactive property detail pages with image galleries
+  - Real-time availability checking
+  - Comprehensive property information and reviews
+
+- **Booking System**
+  - Intuitive date selection and guest count management
+  - Dynamic price calculation with transparent breakdowns
+  - Secure payment processing via Paystack and Flutterwave
+  - Booking history and management dashboard
+  - Email confirmations and reminders
+
+- **Reviews & Ratings**
+  - Post-checkout review submission
+  - 5-star rating system
+  - Verified booking badges
+  - Review statistics and distribution
 
 ### Admin Features (FilamentPHP)
-✅ Property management (CRUD, images, amenities)
-✅ Booking management and tracking
-✅ User management
-✅ Review moderation
-✅ Analytics dashboard
+- **Property Management**
+  - Complete CRUD operations for properties
+  - Multi-image upload and gallery management
+  - Amenities configuration
+  - Availability calendar management
+  - Pricing and booking rules setup
 
----
+- **Booking Management**
+  - Real-time booking tracking
+  - Status management and updates
+  - Cancellation and refund handling
+  - Booking calendar visualization
 
-## Technology Stack
+- **User Management**
+  - Guest account overview
+  - User activity tracking
+  - Dispute resolution tools
+
+- **Analytics Dashboard**
+  - Revenue tracking and reporting
+  - Booking statistics and trends
+  - Property performance metrics
+  - Visual charts and insights
+
+## Tech Stack
 
 ### Backend
-- Laravel 11.x
-- MySQL 8.0+
-- FilamentPHP 3.x
-- Laravel Sanctum (auth)
-- Laravel Socialite (OAuth)
+- **Framework**: Laravel 12.x
+- **Database**: MySQL 8.0+
+- **Admin Panel**: FilamentPHP v4
+- **Authentication**: Laravel Sanctum + Google OAuth (Socialite v5)
+- **Queue System**: Redis
+- **Testing**: Pest v4 (PHPUnit v12)
+- **Code Quality**: Laravel Pint, Larastan
 
 ### Frontend
-- Vue.js 3 (Composition API)
-- Inertia.js
-- Tailwind CSS
-- Vite
+- **Framework**: Vue.js 3 (Composition API)
+- **Integration**: Inertia.js (SPA-like experience)
+- **State Management**: Pinia / Vue Composables
+- **Styling**: Tailwind CSS v4
+- **Build Tool**: Vite
 
-### Integrations
-- Paystack (primary payment)
-- Flutterwave (secondary payment)
-- Google OAuth
-- Email notifications
+### Payment Integration
+- **Primary**: Paystack
+- **Secondary**: Flutterwave
+- **Architecture**: Manager pattern for easy provider switching
 
----
+### DevOps
+- **Version Control**: Git
+- **Package Managers**: Composer, npm/pnpm
+- **Code Formatting**: PHP CS Fixer, ESLint, Prettier
 
-## Important Notes
+## Prerequisites
 
-### For Agentic Coding:
+Before setting up the project, ensure you have the following installed:
 
-When using an AI agent to help build this project:
+- **PHP**: 8.3 or higher
+- **Composer**: 2.x
+- **Node.js**: 18.x or higher
+- **MySQL**: 8.0 or higher
+- **Redis**: Latest stable version (optional but recommended)
+- **Git**: Latest stable version
 
-1. **Always reference the roadmap** - Use FEATURE_ROADMAP.md to track progress
-2. **Follow the standards** - Ensure code adheres to CODING_STANDARDS.md
-3. **Use the design system** - Match DESIGN_SYSTEM.md specifications exactly
-4. **Commit frequently** - Follow GIT_WORKFLOW.md conventions
-5. **Update tracking** - Mark completed tasks in FEATURE_ROADMAP.md
-6. **Ask questions** - If something in the docs is unclear, ask before proceeding
+### Required PHP Extensions
+- `php_openssl`
+- `php_pdo`
+- `php_pdo_mysql`
+- `php_mbstring`
+- `php_tokenizer`
+- `php_xml`
+- `php_ctype`
+- `php_json`
+- `php_bcmath`
+- `php_fileinfo`
 
-### For MVP Development:
+## Installation
 
-- ⚡ **Speed over perfection** - Ship fast, iterate based on feedback
-- 🎯 **Focus on core features** - Don't add features not in the roadmap
-- 🧪 **Test critical paths** - Follow TESTING_STRATEGY.md priorities
-- 📝 **Document decisions** - Log important decisions in FEATURE_ROADMAP.md notes section
-- 🚀 **Deploy early** - Get to production as soon as core features work
-
----
-
-## File Structure
-
-```
-shortlet-booking-docs/
-├── README.md                    # This file - Start here
-├── PROJECT_OVERVIEW.md          # Project scope and tech stack
-├── FEATURE_ROADMAP.md          # Task tracking (update daily!)
-├── CODING_STANDARDS.md         # Code conventions and style guide
-├── DESIGN_SYSTEM.md            # UI/UX specifications
-├── DATABASE_SCHEMA.md          # Database structure
-├── GIT_WORKFLOW.md             # Git and commit conventions
-├── SETUP_GUIDE.md              # Development environment setup
-└── TESTING_STRATEGY.md         # Testing approach and guidelines
-```
-
----
-
-## Development Workflow
-
-### 1. Start New Feature
+### 1. Clone the Repository
 
 ```bash
-# Pull latest code
-git checkout develop
-git pull origin develop
-
-# Create feature branch
-git checkout -b feature/property-search
-
-# Check roadmap for tasks
-# Open FEATURE_ROADMAP.md and mark task as in_progress
+git clone https://github.com/codejutsu1/shortletng.git
+cd shortletng
 ```
 
-### 2. Build Feature
-
-```
-# Reference DATABASE_SCHEMA.md if working with database
-# Reference DESIGN_SYSTEM.md if building UI
-# Follow CODING_STANDARDS.md while coding
-# Add tests per TESTING_STRATEGY.md
-```
-
-### 3. Commit Changes
+### 2. Install Dependencies
 
 ```bash
-# Stage changes
-git add .
+# Install PHP dependencies
+composer install
 
-# Commit using convention from GIT_WORKFLOW.md
-git commit -m "feat: Add property search filtering by location"
-
-# Push to remote
-git push origin feature/property-search
+# Install Node.js dependencies
+npm install
+# or
+pnpm install
 ```
 
-### 4. Complete Feature
+### 3. Environment Configuration
+
+```bash
+# Copy environment file
+cp .env.example .env
+
+# Generate application key
+php artisan key:generate
+```
+
+### 4. Configure Environment Variables
+
+Edit `.env` file with your configuration:
+
+```env
+# Application
+APP_NAME=ShortletNG
+APP_URL=http://localhost:8000
+
+# Database
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=shortletng
+DB_USERNAME=root
+DB_PASSWORD=your_password
+
+# Google OAuth
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+GOOGLE_REDIRECT_URI="${APP_URL}/auth/google/callback"
+
+# Payment Gateway
+PAYMENT_PROVIDER=paystack
+
+# Paystack
+PAYSTACK_PUBLIC_KEY=your_paystack_public_key
+PAYSTACK_SECRET_KEY=your_paystack_secret_key
+
+# Mail
+MAIL_MAILER=smtp
+MAIL_FROM_ADDRESS=noreply@shortletng.com
+```
+
+### 5. Database Setup
+
+# Run migrations
+php artisan migrate
+
+# Seed database with sample data (optional)
+php artisan db:seed
+```
+
+### 6. Storage Setup
+
+```bash
+# Create symbolic link for public storage
+php artisan storage:link
+```
+
+### 7. Build Frontend Assets
+
+```bash
+# Development build with hot reload
+npm run dev
+
+# Production build
+npm run build
+```
+
+## Usage
+
+### Running the Application
+
+**Terminal 1: Laravel Server**
+```bash
+php artisan serve
+```
+Application will be available at: `http://localhost:8000`
+
+**Terminal 2: Vite Dev Server** (for hot module replacement)
+```bash
+npm run dev
+```
+
+**Terminal 3: Queue Worker** (optional)
+```bash
+php artisan queue:work
+```
+
+### Access Points
+
+- **Frontend**: http://localhost:8000
+- **Admin Panel**: http://localhost:8000/admin
+- **API**: http://localhost:8000/api (if needed)
+
+### Create Admin User
+
+```bash
+# Using Filament command
+php artisan make:filament-user
+
+# Or run admin seeder
+php artisan db:seed --class=AdminUserSeeder
+```
+
+## Project Structure
 
 ```
-# Create pull request (see GIT_WORKFLOW.md)
-# Update FEATURE_ROADMAP.md - Mark tasks as completed
-# Merge to develop
-# Delete feature branch
+shortletng/
+├── app/
+│   ├── Filament/          # FilamentPHP admin resources
+│   ├── Http/
+│   │   ├── Controllers/   # Application controllers
+│   │   └── Requests/      # Form request validation
+│   ├── Models/            # Eloquent models
+│   └── Services/          # Business logic services
+├── database/
+│   ├── factories/         # Model factories
+│   ├── migrations/        # Database migrations
+│   └── seeders/           # Database seeders
+├── resources/
+│   ├── js/
+│   │   ├── Components/    # Vue components
+│   │   ├── Layouts/       # Layout components
+│   │   └── Pages/         # Inertia pages
+│   └── views/             # Blade templates
+├── routes/
+│   ├── web.php            # Web routes
+│   └── api.php            # API routes
+├── tests/
+│   ├── Feature/           # Feature tests
+│   └── Unit/              # Unit tests
+└── shortlet-booking-docs/ # Comprehensive project documentation
 ```
 
----
+## Development
 
-## Common Questions
+### Code Quality
 
-### Q: Where do I start?
-**A:** Read PROJECT_OVERVIEW.md, then follow SETUP_GUIDE.md to set up your environment.
+```bash
+# Format PHP code with Pint
+vendor/bin/pint
 
-### Q: How do I track my progress?
-**A:** Use FEATURE_ROADMAP.md - check off tasks as you complete them.
+# Run static analysis
+vendor/bin/phpstan analyse
 
-### Q: What colors should I use?
-**A:** Check DESIGN_SYSTEM.md for the complete color palette.
+# Lint Vue/JavaScript code
+npm run lint
 
-### Q: How should I name my variables/functions?
-**A:** See CODING_STANDARDS.md for naming conventions.
+# Format with Prettier
+npm run format
+```
 
-### Q: How do I structure the database?
-**A:** Everything is defined in DATABASE_SCHEMA.md.
+### Database Management
 
-### Q: What should I test?
-**A:** See TESTING_STRATEGY.md for MVP testing priorities.
+```bash
+# Create new migration
+php artisan make:migration create_table_name
 
-### Q: How do I write commit messages?
-**A:** Follow the format in GIT_WORKFLOW.md.
+# Reset database
+php artisan migrate:fresh --seed
 
----
+# Create new model with migration and factory
+php artisan make:model ModelName -mf
+```
 
-## Getting Help
+## Testing
 
-### Documentation Issues
-If you find errors or unclear sections in this documentation:
-1. Document the issue
-2. Update the relevant file
-3. Add a note in FEATURE_ROADMAP.md
+### Backend Tests
 
-### Technical Issues
-- Laravel: https://laravel.com/docs
-- Vue.js: https://vuejs.org/guide/
-- Inertia.js: https://inertiajs.com/
-- FilamentPHP: https://filamentphp.com/docs
-- Tailwind CSS: https://tailwindcss.com/docs
+```bash
+# Run all tests
+php artisan test
 
----
+# Run specific test file
+php artisan test tests/Feature/BookingTest.php
 
-## Version History
+# Run with coverage
+php artisan test --coverage
 
-- **v1.0** (2025-11-23): Initial documentation created
-  - All core documentation files
-  - Complete feature roadmap
-  - Database schema defined
-  - Design system specified
+# Filter by test name
+php artisan test --filter=testBookingCreation
+```
 
----
+### Frontend Tests
 
-## Next Steps
+```bash
+# Run Vitest tests
+npm run test
 
-1. ✅ **You are here** - Reading the documentation
-2. ⬜ Follow SETUP_GUIDE.md to set up your environment
-3. ⬜ Review FEATURE_ROADMAP.md and start with Phase 0
-4. ⬜ Build features following the roadmap
-5. ⬜ Keep FEATURE_ROADMAP.md updated as you progress
-6. ⬜ Ship the MVP!
+# Run with coverage
+npm run test:coverage
+```
 
----
+## Documentation
+
+Comprehensive documentation is available in the `shortlet-booking-docs/` directory:
+
+- **[PROJECT_OVERVIEW.md](shortlet-booking-docs/PROJECT_OVERVIEW.md)** - Project vision, tech stack, and MVP features
+- **[SETUP_GUIDE.md](shortlet-booking-docs/SETUP_GUIDE.md)** - Detailed setup instructions and troubleshooting
+- **[FEATURE_ROADMAP.md](shortlet-booking-docs/FEATURE_ROADMAP.md)** - Complete feature breakdown and task tracking
+- **[CODING_STANDARDS.md](shortlet-booking-docs/CODING_STANDARDS.md)** - Code conventions and style guide
+- **[DESIGN_SYSTEM.md](shortlet-booking-docs/DESIGN_SYSTEM.md)** - UI/UX specifications and design tokens
+- **[DATABASE_SCHEMA.md](shortlet-booking-docs/DATABASE_SCHEMA.md)** - Database structure and relationships
+- **[GIT_WORKFLOW.md](shortlet-booking-docs/GIT_WORKFLOW.md)** - Branching strategy and commit conventions
+- **[TESTING_STRATEGY.md](shortlet-booking-docs/TESTING_STRATEGY.md)** - Testing approach and guidelines
+
+## Deployment
+
+### Production Checklist
+
+- [ ] Configure production environment variables
+- [ ] Set up production database
+- [ ] Configure file storage (S3 or similar)
+- [ ] Set up production mail service
+- [ ] Configure production queue worker
+- [ ] Set up SSL certificate
+- [ ] Run migrations on production
+- [ ] Build and optimize frontend assets
+- [ ] Set up monitoring and error tracking
+
+### Build for Production
+
+```bash
+# Optimize autoloader
+composer install --optimize-autoloader --no-dev
+
+# Cache configuration
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+# Build frontend assets
+npm run build
+```
 
 ## Contributing
 
-When working on this project:
+We welcome contributions! Please follow these guidelines:
 
-1. **Read the docs first** - Don't guess, check the documentation
-2. **Follow the standards** - Consistency is key
-3. **Update the roadmap** - Keep FEATURE_ROADMAP.md current
-4. **Write meaningful commits** - Follow GIT_WORKFLOW.md
-5. **Test your code** - Use TESTING_STRATEGY.md as a guide
-6. **Document decisions** - Add notes to FEATURE_ROADMAP.md
+1. **Fork the repository**
+2. **Create a feature branch** (`git checkout -b feature/amazing-feature`)
+3. **Follow coding standards** (see [CODING_STANDARDS.md](shortlet-booking-docs/CODING_STANDARDS.md))
+4. **Write tests** for new features
+5. **Commit your changes** following [GIT_WORKFLOW.md](shortlet-booking-docs/GIT_WORKFLOW.md)
+6. **Push to the branch** (`git push origin feature/amazing-feature`)
+7. **Open a Pull Request**
+
+### Commit Message Convention
+
+```
+feat: Add property search filtering by amenities
+fix: Resolve booking date validation issue
+docs: Update setup guide with Redis configuration
+test: Add tests for payment processing
+refactor: Simplify booking service logic
+```
+
+## License
+
+This project is proprietary software. All rights reserved.
+
+## Contact & Support
+
+For questions, issues, or feature requests:
+
+- **Documentation**: Check the `shortlet-booking-docs/` directory
+- **Issues**: Open an issue on GitHub
+- **Email**: support@shortletng.com (placeholder)
+
+## Acknowledgments
+
+Built with:
+- [Laravel](https://laravel.com/)
+- [Vue.js](https://vuejs.org/)
+- [Inertia.js](https://inertiajs.com/)
+- [FilamentPHP](https://filamentphp.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Paystack](https://paystack.com/)
+- [Flutterwave](https://flutterwave.com/)
 
 ---
 
-**Let's build something amazing!** 🚀
-
-For questions or clarification, refer to the specific documentation file or ask your team/AI agent.
-
----
-
-**Documentation last updated:** 2025-11-23
-**Project status:** Documentation complete, ready for development
+**Made with ❤️ for the Nigerian market**
