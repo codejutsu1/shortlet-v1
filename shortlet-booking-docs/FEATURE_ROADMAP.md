@@ -86,7 +86,7 @@
 - [x] Define all model relationships
 - [x] Add fillable fields and casts
 - [x] Add query scopes where neededsting
-- [ ] Add database seeders for development data
+- [x] Add database seeders for development data
 
 **Git Commit**: `Create Eloquent models with relationships and factories`
 
