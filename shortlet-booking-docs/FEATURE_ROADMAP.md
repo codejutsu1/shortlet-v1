@@ -95,13 +95,13 @@
 ## Phase 2: Authentication System
 
 ### 2.1 Google OAuth Setup
-- [ ] Configure Google OAuth credentials in Google Console
-- [ ] Add Google OAuth credentials to .env
-- [ ] Install Laravel Socialite
-- [ ] Create GoogleAuthController
-- [ ] Create OAuth callback route
-- [ ] Handle user creation/login via Google
-- [ ] Create user profile page
+- [x] Configure Google OAuth credentials in Google Console
+- [x] Add Google OAuth credentials to .env
+- [x] Install Laravel Socialite
+- [x] Create GoogleAuthController
+- [x] Create OAuth callback route
+- [x] Handle user creation/login via Google
+- [x] Create user profile page
 
 **Git Commit**: `Implement Google OAuth authentication with Laravel Socialite`
 
