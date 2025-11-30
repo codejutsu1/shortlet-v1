@@ -47,7 +47,7 @@ class Property extends Model
 
     public function amenities(): BelongsToMany
     {
-        return $this->belongsToMany(Amenity::class);
+        return $this->belongsToMany(Amenity::class, 'property_amenity');
     }
 
     public function bookings(): HasMany
