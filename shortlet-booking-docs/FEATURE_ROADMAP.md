@@ -106,13 +106,13 @@
 **Git Commit**: `Implement Google OAuth authentication with Laravel Socialite`
 
 ### 2.2 Traditional Authentication (Fallback)
-- [ ] Create registration form (Vue component)
-- [ ] Create login form (Vue component)
-- [ ] Implement registration logic (backend)
-- [ ] Implement login logic (backend)
-- [ ] Add email verification flow
-- [ ] Create password reset flow
-- [ ] Add logout functionality
+- [x] Create registration form (Vue component)
+- [x] Create login form (Vue component)
+- [x] Implement registration logic (backend)
+- [x] Implement login logic (backend)
+- [ ] Add email verification flow (deferred to Phase 9)
+- [ ] Create password reset flow (deferred to Phase 9)
+- [x] Add logout functionality
 
 **Git Commit**: `Add traditional email/password authentication as fallback`
 
