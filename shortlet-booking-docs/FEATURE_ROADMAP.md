@@ -130,6 +130,7 @@
 ## Phase 3: Admin Panel (FilamentPHP)
 
 ### 3.1 FilamentPHP Configuration
+- [ ] Install FilamentPHP package
 - [ ] Configure Filament admin panel
 - [ ] Create admin user seeder
 - [ ] Customize Filament branding (logo, colors)
@@ -139,33 +140,60 @@
 **Git Commit**: `Configure FilamentPHP admin panel with branding`
 
 ### 3.2 Property Management Resources
-- [ ] Create Property resource in Filament
-- [ ] Add property form (name, description, location, price)
-- [ ] Add property image upload (multiple images)
-- [ ] Create Amenity resource in Filament
-- [ ] Add amenities relationship to property form
-- [ ] Add property status toggle (active/inactive)
-- [ ] Create property availability calendar widget
-- [ ] Add bulk actions for properties
+- [ ] Create Property Filament resource
+- [ ] Create PropertyImage Filament resource
+- [ ] Add property CRUD operations
+- [ ] Implement image upload functionality
+- [ ] Add property status management
 
-**Git Commit**: `Implement property management in FilamentPHP admin panel`
+**Git Commit**: `Add property management resources to admin panel`
 
-### 3.3 Booking Management Resources
-- [ ] Create Booking resource in Filament
-- [ ] Add booking list with filters (status, date range)
-- [ ] Add booking detail view
-- [ ] Implement booking status management
-- [ ] Add cancellation functionality
-- [ ] Create booking calendar widget
-- [ ] Add booking statistics widget
+### 3.3 User & Booking Management
+- [ ] Create User Filament resource
+- [ ] Create Booking Filament resource
+- [ ] Create Payment Filament resource
+- [ ] Add booking status workflow
+- [ ] Implement analytics dashboard widgets
 
-**Git Commit**: `Implement booking management in admin panel`
+**Git Commit**: `Add user and booking management to admin panel`
 
-### 3.4 User & Review Management
-- [ ] Create User resource in Filament
-- [ ] Add user list with filters
-- [ ] Add user detail view
-- [ ] Create Review resource in Filament
+---
+
+## Phase 4: Property Listing & Search
+
+### 4.1 Property Listing Page
+- [ ] Create properties index page (Vue component)
+- [ ] Implement property grid/list layout
+- [ ] Add property card component
+- [ ] Create PropertyController for listing
+- [ ] Add pagination
+- [ ] Implement filtering (city, price, amenities)
+
+**Git Commit**: `Create property listing page with filtering`
+
+### 4.2 Property Detail Page
+- [ ] Create property show page (Vue component)
+- [ ] Display property information
+- [ ] Create image gallery component
+- [ ] Show amenities list
+- [ ] Add booking form component
+- [ ] Implement similar properties section
+
+**Git Commit**: `Create property detail page with booking form`
+
+### 4.3 Search Functionality
+- [ ] Implement search bar component
+- [ ] Add location autocomplete
+- [ ] Create date range picker
+- [ ] Implement guest count selector
+- [ ] Add search results page
+- [ ] Implement search algorithm (backend)
+
+**Git Commit**: `Implement property search with filters`
+
+---
+
+## Phase 5: Booking System
 - [ ] Add review moderation functionality
 - [ ] Add ability to respond to reviews
 - [ ] Create review statistics widget
