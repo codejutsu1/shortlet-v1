@@ -1,5 +1,6 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
+import BookingWidget from '@/Components/BookingWidget.vue';
 
 defineProps({
     property: {
@@ -102,28 +103,31 @@ const primaryImage = property => property.images?.find(img => img.is_primary)?.i
 
                 <!-- Booking Card (Sticky) -->
                 <div class="lg:col-span-1">
-                    <div class="sticky top-4 rounded-xl bg-white p-6 shadow-lg">
-                        <div class="mb-4 text-center">
-                            <span class="text-3xl font-bold text-gray-900">
-                                ₦{{ Number(property.price_per_night).toLocaleString() }}
-                            </span>
-                            <span class="text-gray-600">/night</span>
+                    <div class="sticky top-4">
+                        <BookingWidget v-if="$page.props.auth.user" :property="property" />
+                        <div v-else class="rounded-xl bg-white p-6 shadow-lg">
+                            <div class="mb-4 text-center">
+                                <span class="text-3xl font-bold text-gray-900">
+                                    ₦{{ Number(property.price_per_night).toLocaleString() }}
+                                </span>
+                                <span class="text-gray-600">/night</span>
+                            </div>
+
+                            <p class="mb-4 text-center text-sm text-gray-600">
+                                Sign in to book this property
+                            </p>
+
+                            <Link
+                                href="/login"
+                                class="block w-full rounded-lg bg-primary-600 px-6 py-3 text-center font-semibold text-white transition-colors hover:bg-primary-700"
+                            >
+                                Login to Book
+                            </Link>
+
+                            <p class="mt-4 text-center text-xs text-gray-500">
+                                You won't be charged yet
+                            </p>
                         </div>
-
-                        <p class="mb-4 text-center text-sm text-gray-600">
-                            Sign in to book this property
-                        </p>
-
-                        <Link
-                            href="/login"
-                            class="block w-full rounded-lg bg-primary-600 px-6 py-3 text-center font-semibold text-white transition-colors hover:bg-primary-700"
-                        >
-                            Login to Book
-                        </Link>
-
-                        <p class="mt-4 text-center text-xs text-gray-500">
-                            You won't be charged yet
-                        </p>
                     </div>
                 </div>
             </div>
