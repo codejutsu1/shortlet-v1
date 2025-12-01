@@ -268,36 +268,36 @@
 ## Phase 5: Booking System
 
 ### 5.1 Booking Flow Frontend
-- [ ] Create booking widget component
-- [ ] Add date range picker with availability
-- [ ] Add guest count selector
-- [ ] Calculate and display price breakdown
-- [ ] Add booking summary section
-- [ ] Create booking confirmation page
-- [ ] Add booking form (guest details)
-- [ ] Implement form validation
+- [x] Create booking widget component
+- [x] Add date range picker with availability
+- [x] Add guest count selector
+- [x] Calculate and display price breakdown
+- [x] Add booking summary section
+- [x] Create booking confirmation page
+- [x] Add booking form (guest details)
+- [x] Implement form validation
 
 **Git Commit**: `Create booking flow frontend with date picker and price calculation`
 
 ### 5.2 Booking Logic Backend
-- [ ] Create BookingService
-- [ ] Implement availability check logic
-- [ ] Implement price calculation (nights, fees, taxes)
-- [ ] Create booking creation endpoint
-- [ ] Implement booking validation rules
-- [ ] Add booking conflict prevention
-- [ ] Create booking confirmation logic
-- [ ] Add booking to user's history
+- [x] Create BookingService
+- [x] Implement availability check logic
+- [x] Implement price calculation (nights, fees, taxes)
+- [x] Create booking creation endpoint
+- [x] Implement booking validation rules
+- [x] Add booking conflict prevention
+- [x] Create booking confirmation logic
+- [x] Add booking to user's history
 
 **Git Commit**: `Implement booking logic with availability checks and validation`
 
 ### 5.3 Booking Management (Guest Side)
-- [ ] Create "My Bookings" page component
-- [ ] Display upcoming bookings
-- [ ] Display past bookings
-- [ ] Add booking detail modal
-- [ ] Add cancellation functionality (guest side)
-- [ ] Add booking status indicators
+- [x] Create "My Bookings" page component
+- [x] Display upcoming bookings
+- [x] Display past bookings
+- [x] Add booking detail modal
+- [x] Add cancellation functionality (guest side)
+- [x] Add booking status indicators
 - [ ] Add download booking receipt (optional)
 
 **Git Commit**: `Create guest booking management page with history and details`
