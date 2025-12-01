@@ -162,22 +162,22 @@
 ## Phase 4: Property Listing & Search
 
 ### 4.1 Property Listing Page
-- [ ] Create properties index page (Vue component)
-- [ ] Implement property grid/list layout
-- [ ] Add property card component
-- [ ] Create PropertyController for listing
-- [ ] Add pagination
-- [ ] Implement filtering (city, price, amenities)
+- [x] Create properties index page (Vue component)
+- [x] Implement property grid/list layout
+- [x] Add property card component
+- [x] Create PropertyController for listing
+- [x] Add pagination
+- [x] Implement filtering (city, price, amenities)
 
 **Git Commit**: `Create property listing page with filtering`
 
 ### 4.2 Property Detail Page
-- [ ] Create property show page (Vue component)
-- [ ] Display property information
-- [ ] Create image gallery component
-- [ ] Show amenities list
-- [ ] Add booking form component
-- [ ] Implement similar properties section
+- [x] Create property show page (Vue component)
+- [x] Display property information
+- [x] Create image gallery component
+- [x] Show amenities list
+- [x] Add booking form component
+- [x] Implement similar properties section
 
 **Git Commit**: `Create property detail page with booking form`
 
