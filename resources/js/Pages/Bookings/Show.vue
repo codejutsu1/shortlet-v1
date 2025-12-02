@@ -112,7 +112,25 @@ const primaryImage = booking.property.images?.find(img => img.is_primary)?.image
                 </div>
 
                 <!-- Actions -->
-                <div v-if="booking.status === 'pending' || booking.status === 'confirmed'" class="flex gap-4">
+                <div v-if="booking.status === 'pending'" class="flex gap-4">
+                    <Link
+                        :href="`/payments/initialize/${booking.id}`"
+                        method="post"
+                        as="button"
+                        class="rounded-lg bg-green-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-green-700"
+                    >
+                        Pay Now
+                    </Link>
+                    <button
+                        @click="cancelBooking"
+                        :disabled="cancelForm.processing"
+                        class="rounded-lg border-2 border-red-600 px-6 py-2 font-semibold text-red-600 transition-colors hover:bg-red-50 disabled:opacity-50"
+                    >
+                        {{ cancelForm.processing ? 'Cancelling...' : 'Cancel Booking' }}
+                    </button>
+                </div>
+
+                <div v-else-if="booking.status === 'confirmed'" class="flex gap-4">
                     <button
                         @click="cancelBooking"
                         :disabled="cancelForm.processing"
