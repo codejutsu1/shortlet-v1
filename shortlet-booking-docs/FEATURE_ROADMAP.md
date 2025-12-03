@@ -319,15 +319,16 @@
 **Git Commit**: `Implement payment manager pattern with Paystack and Flutterwave`
 
 ### 6.2 Paystack Integration
-- [ ] Add Paystack credentials to .env
-- [ ] Install Paystack PHP library
-- [ ] Implement payment initialization
-- [ ] Create payment redirect flow
-- [ ] Implement payment callback handling
-- [ ] Implement webhook verification
-- [ ] Test payment flow end-to-end
+- [x] Add Paystack credentials to .env
+- [x] Install Paystack PHP library
+- [x] Implement payment initialization
+- [x] Create payment redirect flow
+- [x] Implement payment callback handling
+- [x] Implement webhook verification
+- [x] Test payment flow end-to-end
 
 **Git Commit**: `Integrate Paystack payment gateway`
+
 
 ### 6.3 Flutterwave Integration
 - [ ] Add Flutterwave credentials to .env

@@ -15,7 +15,8 @@ class PaymentController extends Controller
 {
     public function __construct(
         private PaymentManager $paymentManager
-    ) {}
+    ) {
+    }
 
     /**
      * Initialize payment for a booking
@@ -36,7 +37,7 @@ class PaymentController extends Controller
         $paymentRequest = new PaymentRequest(
             amount: (float) $booking->total_price,
             email: Auth::user()->email,
-            reference: 'BK-'.$booking->id.'-'.time(),
+            reference: 'BK-' . $booking->id . '-' . time(),
             callbackUrl: route('payments.callback'),
             metadata: [
                 'booking_id' => $booking->id,
@@ -54,7 +55,7 @@ class PaymentController extends Controller
                 'booking_id' => $booking->id,
                 'amount' => $booking->total_price,
                 'payment_method' => $this->paymentManager->getProviderName(),
-                'transaction_id' => $response->reference,
+                'payment_reference' => $response->reference,
                 'status' => 'pending',
             ]);
 
@@ -72,7 +73,7 @@ class PaymentController extends Controller
     {
         $reference = $request->query('reference') ?? $request->query('tx_ref');
 
-        if (! $reference) {
+        if (!$reference) {
             return redirect()->route('payments.failed')
                 ->with('error', 'Payment reference not found.');
         }
@@ -85,13 +86,13 @@ class PaymentController extends Controller
 
             if ($bookingId) {
                 $booking = Booking::find($bookingId);
-                $payment = Payment::where('transaction_id', $reference)->first();
+                $payment = Payment::where('payment_reference', $reference)->first();
 
                 if ($booking && $payment) {
                     // Update payment status
                     $payment->update([
-                        'status' => 'completed',
-                        'payment_date' => now(),
+                        'status' => 'successful',
+                        'paid_at' => now(),
                     ]);
 
                     // Update booking status
@@ -119,7 +120,7 @@ class PaymentController extends Controller
     public function webhook(Request $request)
     {
         // Validate webhook with the active provider
-        if (! $this->paymentManager->handleWebhook($request)) {
+        if (!$this->paymentManager->handleWebhook($request)) {
             Log::warning('Invalid webhook received', [
                 'provider' => $this->paymentManager->getProviderName(),
             ]);
@@ -141,12 +142,12 @@ class PaymentController extends Controller
 
             if ($bookingId && $reference) {
                 $booking = Booking::find($bookingId);
-                $payment = Payment::where('transaction_id', $reference)->first();
+                $payment = Payment::where('payment_reference', $reference)->first();
 
                 if ($booking && $payment && $payment->status === 'pending') {
                     $payment->update([
-                        'status' => 'completed',
-                        'payment_date' => now(),
+                        'status' => 'successful',
+                        'paid_at' => now(),
                     ]);
 
                     $booking->update(['status' => 'confirmed']);
