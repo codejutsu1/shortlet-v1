@@ -20,8 +20,8 @@ class BookingFactory extends Factory
     public function definition(): array
     {
         $checkIn = fake()->dateTimeBetween('+1 day', '+3 months');
-        $checkOut = fake()->dateTimeBetween($checkIn, '+2 weeks');
-        $nights = $checkIn->diff($checkOut)->days;
+        $nights = fake()->numberBetween(1, 14); // 1-14 nights
+        $checkOut = (clone $checkIn)->modify("+{$nights} days");
         $pricePerNight = fake()->randomFloat(2, 20000, 150000);
 
         return [
@@ -30,7 +30,7 @@ class BookingFactory extends Factory
             'check_in' => $checkIn,
             'check_out' => $checkOut,
             'guests' => fake()->numberBetween(1, 6),
-            'total_price' => $pricePerNight * max($nights, 1),
+            'total_price' => $pricePerNight * $nights,
             'status' => fake()->randomElement(['pending', 'confirmed', 'cancelled', 'completed']),
         ];
     }
@@ -61,7 +61,8 @@ class BookingFactory extends Factory
     public function completed(): static
     {
         $checkIn = fake()->dateTimeBetween('-2 months', '-1 month');
-        $checkOut = fake()->dateTimeBetween($checkIn, '-1 week');
+        $nights = fake()->numberBetween(1, 14);
+        $checkOut = (clone $checkIn)->modify("+{$nights} days");
 
         return $this->state(fn(array $attributes) => [
             'check_in' => $checkIn,
