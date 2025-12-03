@@ -9,6 +9,26 @@ use Inertia\Inertia;
 class PropertyController extends Controller
 {
     /**
+     * Display the homepage with featured properties.
+     */
+    public function homepage()
+    {
+        // Get featured properties or fallback to recent active properties
+        $featuredProperties = Property::where('status', 'active')
+            ->where(function ($query) {
+                $query->where('is_featured', true)
+                    ->orWhere('created_at', '>=', now()->subDays(30));
+            })
+            ->with(['images' => fn($q) => $q->where('is_primary', true)->orWhereNull('is_primary')->orderBy('is_primary', 'desc')])
+            ->limit(8)
+            ->get();
+
+        return Inertia::render('Welcome', [
+            'featuredProperties' => $featuredProperties,
+        ]);
+    }
+
+    /**
      * Display a listing of properties.
      */
     public function index(Request $request)

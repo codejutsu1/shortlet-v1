@@ -10,9 +10,7 @@ use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome');
-});
+Route::get('/', [PropertyController::class, 'homepage'])->name('home');
 
 // Property Routes
 Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
