@@ -11,7 +11,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('login'), {
+    form.post(window.route('login'), {
         onFinish: () => form.reset('password'),
     });
 };
@@ -30,7 +30,6 @@ const submit = () => {
 
                     <!-- Google OAuth Button -->
                     <a
-                        :href="route('auth.google')"
                         class="mb-6 flex w-full items-center justify-center gap-3 rounded-lg border-2 border-gray-300 bg-white px-6 py-3 font-semibold text-gray-700 transition-all duration-200 hover:border-gray-400 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
                     >
                         <!-- Google Logo SVG -->

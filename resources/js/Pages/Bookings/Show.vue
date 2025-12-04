@@ -10,7 +10,7 @@ const cancelForm = useForm({});
 
 const cancelBooking = () => {
     if (confirm('Are you sure you want to cancel this booking?')) {
-        cancelForm.post(route('bookings.cancel', props.booking.id));
+        cancelForm.post(window.route('bookings.cancel', props.booking.id));
     }
 };
 

@@ -215,13 +215,13 @@
 ## Phase 4: Property Discovery (Guest Frontend)
 
 ### 4.1 Homepage
-- [ ] Create homepage layout component
-- [ ] Add hero section with search bar
-- [ ] Add featured properties section
-- [ ] Add property categories section
-- [ ] Add testimonials section (optional)
-- [ ] Add footer component
-- [ ] Implement responsive design
+- [x] Create homepage layout component
+- [x] Add hero section with search bar
+- [x] Add featured properties section
+- [x] Add property categories section (integrated into features)
+- [x] Add testimonials section (skipped for MVP)
+- [x] Add footer component (integrated into layout)
+- [x] Implement responsive design
 
 **Git Commit**: `Create homepage with hero section and featured properties`
 

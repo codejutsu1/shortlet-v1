@@ -24,6 +24,7 @@ class Property extends Model
         'bathrooms',
         'max_guests',
         'status',
+        'is_featured',
     ];
 
     protected $casts = [
@@ -31,6 +32,7 @@ class Property extends Model
         'bedrooms' => 'integer',
         'bathrooms' => 'integer',
         'max_guests' => 'integer',
+        'is_featured' => 'boolean',
     ];
 
     // Relationships
