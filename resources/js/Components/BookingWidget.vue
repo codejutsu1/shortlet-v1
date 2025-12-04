@@ -29,7 +29,7 @@ const totalPrice = computed(() => {
 });
 
 const submitBooking = () => {
-    form.post(route('bookings.store'), {
+    form.post(window.route('bookings.store'), {
         onSuccess: () => {
             // Redirect handled by controller
         },

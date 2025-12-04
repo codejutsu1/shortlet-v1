@@ -21,7 +21,7 @@ const searchForm = ref({
 });
 
 const handleSearch = () => {
-    router.get(route('properties.index'), {
+    router.get(window.route('properties.index'), {
         city: searchForm.value.location,
         // Add date and guest filters later
     });
@@ -113,7 +113,7 @@ const handleSearch = () => {
                 <Link
                     v-for="property in featuredProperties"
                     :key="property.id"
-                    :href="route('properties.show', property.id)"
+                    :href="window.route('properties.show', property.id)"
                     class="group"
                 >
                     <Card class="h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
@@ -166,7 +166,7 @@ const handleSearch = () => {
             </div>
 
             <div class="mt-12 text-center">
-                <Link :href="route('properties.index')">
+                <Link :href="window.route('properties.index')">
                     <Button variant="secondary" class="px-8">
                         View All Properties →
                     </Button>
@@ -234,12 +234,12 @@ const handleSearch = () => {
                     Join thousands of satisfied guests and hosts on ShortletNG
                 </p>
                 <div class="mt-8 flex justify-center gap-4">
-                    <Link :href="route('register')">
+                    <Link>
                         <Button variant="secondary" class="px-8">
                             Create Account
                         </Button>
                     </Link>
-                    <Link :href="route('properties.index')">
+                    <Link>
                         <Button variant="ghost" class="border-2 border-white px-8 text-white hover:bg-white hover:text-indigo-600">
                             Browse Properties
                         </Button>
