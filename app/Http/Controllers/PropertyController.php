@@ -34,7 +34,7 @@ class PropertyController extends Controller
     public function index(Request $request)
     {
         $query = Property::query()
-            ->with(['images', 'amenities', 'user'])
+            ->with(['images', 'amenities'])
             ->where('status', 'active');
 
         // Filter by city
@@ -50,23 +50,69 @@ class PropertyController extends Controller
             $query->where('price_per_night', '<=', $request->max_price);
         }
 
-        // Filter by amenities
-        if ($request->filled('amenities')) {
-            $amenityIds = explode(',', $request->amenities);
-            $query->whereHas('amenities', function ($q) use ($amenityIds) {
-                $q->whereIn('amenities.id', $amenityIds);
-            });
+        // Filter by guest count
+        if ($request->filled('guests')) {
+            $query->where('max_guests', '>=', $request->guests);
         }
 
-        $properties = $query->paginate(12);
+        // Filter by amenities (all selected amenities must be present)
+        if ($request->filled('amenities')) {
+            $amenityIds = is_array($request->amenities)
+                ? $request->amenities
+                : explode(',', $request->amenities);
 
-        // Get unique cities for filter
-        $cities = Property::select('city')->distinct()->pluck('city');
+            foreach ($amenityIds as $amenityId) {
+                $query->whereHas('amenities', function ($q) use ($amenityId) {
+                    $q->where('amenities.id', $amenityId);
+                });
+            }
+        }
+
+        // Sorting
+        $sortBy = $request->input('sort_by', 'newest');
+        switch ($sortBy) {
+            case 'price_low':
+                $query->orderBy('price_per_night', 'asc');
+                break;
+            case 'price_high':
+                $query->orderBy('price_per_night', 'desc');
+                break;
+            case 'rating':
+                $query->withAvg('reviews', 'rating')
+                    ->orderByDesc('reviews_avg_rating');
+                break;
+            case 'newest':
+            default:
+                $query->orderByDesc('created_at');
+                break;
+        }
+
+        $properties = $query->paginate(12)->withQueryString();
+
+        // Get filter options
+        $cities = Property::where('status', 'active')
+            ->select('city')
+            ->distinct()
+            ->pluck('city')
+            ->sort()
+            ->values();
+
+        $amenities = \App\Models\Amenity::orderBy('name')->get();
 
         return Inertia::render('Properties/Index', [
             'properties' => $properties,
             'cities' => $cities,
-            'filters' => $request->only(['city', 'min_price', 'max_price', 'amenities']),
+            'amenities' => $amenities,
+            'filters' => $request->only([
+                'city',
+                'check_in',
+                'check_out',
+                'guests',
+                'min_price',
+                'max_price',
+                'amenities',
+                'sort_by'
+            ]),
         ]);
     }
 

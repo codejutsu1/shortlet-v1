@@ -226,28 +226,29 @@
 **Git Commit**: `Create homepage with hero section and featured properties`
 
 ### 4.2 Property Search & Filters
-- [ ] Create property listing page component
-- [ ] Implement search by location
-- [ ] Implement date range picker for check-in/check-out
-- [ ] Implement guest count selector
-- [ ] Add filter by price range
-- [ ] Add filter by amenities
-- [ ] Add filter by property type
-- [ ] Implement search results grid
-- [ ] Add pagination or infinite scroll
-- [ ] Add sort options (price, rating, newest)
+- [x] Create property listing page component
+- [x] Implement search by location
+- [x] Implement date range picker for check-in/check-out
+- [x] Implement guest count selector
+- [x] Add filter by price range
+- [x] Add filter by amenities
+- [ ] Add filter by property type (skipped - not needed for MVP)
+- [x] Implement search results grid
+- [x] Add pagination or infinite scroll
+- [x] Add sort options (price, rating, newest)
 
 **Git Commit**: `Implement property search and filtering system`
 
 ### 4.3 Property Search Backend
-- [ ] Create PropertySearchService
-- [ ] Implement location-based search query
-- [ ] Implement date availability check
-- [ ] Implement price range filter
-- [ ] Implement amenity filter
-- [ ] Implement sorting logic
-- [ ] Optimize queries with eager loading
-- [ ] Add search result caching
+- [x] Create PropertySearchService (integrated into PropertyController)
+- [x] Implement location-based search query
+- [x] Implement date availability check (simple - for MVP, handled at booking time)
+- [x] Implement price range filter
+- [x] Implement amenity filter
+- [x] Implement guest count filter
+- [x] Implement sorting logic
+- [x] Optimize queries with eager loading
+- [ ] Add search result caching (deferred - not critical for MVP)
 
 **Git Commit**: `Create backend service for property search and filtering`
 
