@@ -358,24 +358,24 @@
 ## Phase 7: Reviews & Ratings System
 
 ### 7.1 Review Submission Frontend
-- [ ] Create review form component
-- [ ] Add star rating input
-- [ ] Add review text input
-- [ ] Add review photo upload (optional)
-- [ ] Implement form validation
-- [ ] Show review submission only after checkout
-- [ ] Add success message after submission
+- [x] Create review form component
+- [x] Add star rating input
+- [x] Add review text input
+- [ ] Add review photo upload (skipped - optional for MVP)
+- [x] Implement form validation
+- [x] Show review submission only after checkout
+- [x] Add success message after submission
 
 **Git Commit**: `Create review submission form for guests`
 
 ### 7.2 Review System Backend
-- [ ] Create ReviewService
-- [ ] Implement review eligibility check (must have completed booking)
-- [ ] Implement review creation logic
-- [ ] Prevent duplicate reviews per booking
-- [ ] Calculate and update property average rating
-- [ ] Add review to property detail page
-- [ ] Implement review pagination
+- [x] Create ReviewService (ReviewController)
+- [x] Implement review eligibility check (must have completed booking)
+- [x] Implement review creation logic
+- [x] Prevent duplicate reviews per booking
+- [ ] Calculate and update property average rating (already done in Phase 4.4)
+- [x] Add review to property detail page (already done in Phase 4.4)
+- [ ] Implement review pagination (deferred - showing latest 10)
 
 **Git Commit**: `Implement review system backend with eligibility checks`
 

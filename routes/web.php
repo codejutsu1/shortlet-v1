@@ -28,6 +28,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/payments/callback', [PaymentController::class, 'callback'])->name('payments.callback');
     Route::get('/payments/success/{booking}', [PaymentController::class, 'success'])->name('payments.success');
     Route::get('/payments/failed', [PaymentController::class, 'failed'])->name('payments.failed');
+
+    // Review Routes
+    Route::get('/bookings/{booking}/review', [\App\Http\Controllers\ReviewController::class, 'create'])->name('reviews.create');
+    Route::post('/bookings/{booking}/review', [\App\Http\Controllers\ReviewController::class, 'store'])->name('reviews.store');
 });
 
 // Paystack Webhook (no auth required)
