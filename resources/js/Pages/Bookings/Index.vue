@@ -76,19 +76,40 @@ const primaryImage = (property) => property.images?.find(img => img.is_primary)?
                                 </div>
                             </div>
 
-                            <div class="mt-4 flex items-center justify-between">
+                            <div class="mt-4 flex items-center justify-between gap-4">
                                 <div>
                                     <p class="text-sm text-gray-600">Total Price</p>
                                     <p class="text-2xl font-bold text-primary-600">
                                         ₦{{ Number(booking.total_price).toLocaleString() }}
                                     </p>
                                 </div>
-                                <Link
-                                    :href="`/bookings/${booking.id}`"
-                                    class="rounded-lg bg-primary-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-primary-700"
-                                >
-                                    View Details
-                                </Link>
+                                <div class="flex gap-3">
+                                    <!-- Leave Review Button (for completed bookings without review) -->
+                                    <Link
+                                        v-if="booking.status === 'completed' && !booking.review && new Date(booking.check_out) < new Date()"
+                                        :href="`/bookings/${booking.id}/review`"
+                                        class="rounded-lg border-2 border-primary-600 px-6 py-2 font-semibold text-primary-600 transition-colors hover:bg-primary-50"
+                                    >
+                                        Leave a Review
+                                    </Link>
+                                    <!-- Already Reviewed Indicator -->
+                                    <span 
+                                        v-else-if="booking.review"
+                                        class="flex items-center gap-1 rounded-lg bg-green-50 px-4 py-2 text-green-700"
+                                    >
+                                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span class="text-sm font-semibold">Reviewed</span>
+                                    </span>
+                                    <!-- View Details Button -->
+                                    <Link
+                                        :href="`/bookings/${booking.id}`"
+                                        class="rounded-lg bg-primary-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-primary-700"
+                                    >
+                                        View Details
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </div>
