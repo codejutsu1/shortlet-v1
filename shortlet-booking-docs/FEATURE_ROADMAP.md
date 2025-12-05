@@ -343,13 +343,13 @@
 **Git Commit**: `Integrate Flutterwave payment gateway`
 
 ### 6.4 Payment Flow Integration
-- [ ] Connect booking creation with payment
-- [ ] Create payment status tracking
-- [ ] Handle payment success (confirm booking)
-- [ ] Handle payment failure (notify user)
-- [ ] Create payment records in database
-- [ ] Send payment confirmation email
-- [ ] Add payment receipts
+- [x] Connect booking creation with payment
+- [x] Create payment status tracking
+- [x] Handle payment success (confirm booking)
+- [x] Handle payment failure (notify user)
+- [x] Create payment records in database
+- [ ] Send payment confirmation email (deferred)
+- [ ] Add payment receipts (deferred)
 
 **Git Commit**: `Connect payment flow with booking system`
 
