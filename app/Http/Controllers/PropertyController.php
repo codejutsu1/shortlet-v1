@@ -121,7 +121,30 @@ class PropertyController extends Controller
      */
     public function show(Property $property)
     {
-        $property->load(['images', 'amenities', 'user']);
+        // Load relationships including reviews
+        $property->load([
+            'images',
+            'amenities',
+            'user',
+            'reviews' => function ($query) {
+                $query->with('user')
+                    ->latest()
+                    ->limit(10); // Show latest 10 reviews
+            }
+        ]);
+
+        // Calculate average rating and review count
+        $averageRating = $property->reviews()->avg('rating');
+        $reviewCount = $property->reviews()->count();
+
+        // Get rating breakdown (count for each star rating)
+        $ratingBreakdown = [
+            5 => $property->reviews()->where('rating', 5)->count(),
+            4 => $property->reviews()->where('rating', 4)->count(),
+            3 => $property->reviews()->where('rating', 3)->count(),
+            2 => $property->reviews()->where('rating', 2)->count(),
+            1 => $property->reviews()->where('rating', 1)->count(),
+        ];
 
         // Get similar properties (same city, exclude current)
         $similarProperties = Property::where('city', $property->city)
@@ -133,6 +156,9 @@ class PropertyController extends Controller
 
         return Inertia::render('Properties/Show', [
             'property' => $property,
+            'averageRating' => $averageRating ? round($averageRating, 1) : null,
+            'reviewCount' => $reviewCount,
+            'ratingBreakdown' => $ratingBreakdown,
             'similarProperties' => $similarProperties,
         ]);
     }

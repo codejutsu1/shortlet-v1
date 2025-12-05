@@ -253,14 +253,14 @@
 **Git Commit**: `Create backend service for property search and filtering`
 
 ### 4.4 Property Detail Page
-- [ ] Create property detail page component
-- [ ] Add property image gallery (with lightbox)
-- [ ] Add property information section
-- [ ] Add amenities display
-- [ ] Add property location map (optional)
-- [ ] Add reviews section
-- [ ] Add booking widget (sticky sidebar)
-- [ ] Add share functionality (optional)
+- [x] Create property detail page component
+- [x] Add property image gallery (with lightbox)
+- [x] Add property information section
+- [x] Add amenities display
+- [ ] Add property location map (skipped - optional for MVP)
+- [x] Add reviews section
+- [x] Add booking widget (sticky sidebar)
+- [ ] Add share functionality (skipped - optional for MVP)
 
 **Git Commit**: `Create property detail page with image gallery and information`
 
