@@ -1,7 +1,9 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
-import { Link } from '@inertiajs/vue3';
+import { Link, router } from '@inertiajs/vue3';
 import BookingWidget from '@/Components/BookingWidget.vue';
+import ReviewCard from '@/Components/ReviewCard.vue';
+import RatingStatistics from '@/Components/RatingStatistics.vue';
 
 const props = defineProps({
     property: {
@@ -15,6 +17,10 @@ const props = defineProps({
     averageRating: Number,
     reviewCount: Number,
     ratingBreakdown: Object,
+    reviewSort: {
+        type: String,
+        default: 'newest'
+    },
 });
 
 // Image gallery state
@@ -68,23 +74,21 @@ onUnmounted(() => {
     document.body.style.overflow = '';
 });
 
-// Star rating helper
-const getStarRating = (rating) => {
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 >= 0.5;
-    return { fullStars, hasHalfStar };
-};
-
-// Rating percentage for breakdown bars
-const getRatingPercentage = (count) => {
-    return props.reviewCount > 0 ? (count / props.reviewCount) * 100 : 0;
-};
-
 // Get primary image for similar properties
 const getSimilarPropertyImage = (property) => {
     return property.images?.find(img => img.is_primary)?.image_path
         || property.images?.[0]?.image_path
         || 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800';
+};
+
+// Handle review sort change
+const handleSortChange = (event) => {
+    router.get(window.location.pathname, {
+        review_sort: event.target.value
+    }, {
+        preserveState: true,
+        preserveScroll: true,
+    });
 };
 </script>
 
@@ -214,67 +218,36 @@ const getSimilarPropertyImage = (property) => {
 
                     <!-- Reviews Section -->
                     <div v-if="reviewCount > 0" class="rounded-xl bg-white p-6 shadow-md">
-                        <h2 class="mb-6 text-xl font-semibold">Reviews</h2>
+                        <div class="mb-6 flex items-center justify-between">
+                            <h2 class="text-xl font-semibold">Reviews</h2>
+                            
+                            <!-- Sort Dropdown -->
+                            <select
+                                :value="reviewSort"
+                                @change="handleSortChange"
+                                class="rounded-lg border-gray-300 text-sm focus:border-primary-500 focus:ring-primary-500"
+                            >
+                                <option value="newest">Newest First</option>
+                                <option value="highest_rated">Highest Rated</option>
+                                <option value="lowest_rated">Lowest Rated</option>
+                            </select>
+                        </div>
                         
-                        <!-- Overall Rating -->
-                        <div class="mb-6 flex items-center gap-4">
-                            <div class="text-5xl font-bold text-gray-900">{{ averageRating }}</div>
-                            <div>
-                                <div class="flex items-center gap-1 text-yellow-400">
-                                    <template v-for="i in getStarRating(averageRating).fullStars" :key="'full-' + i">
-                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                    </template>
-                                    <template v-if="getStarRating(averageRating).hasHalfStar">
-                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" opacity="0.5" />
-                                        </svg>
-                                    </template>
-                                </div>
-                                <p class="text-sm text-gray-600">{{ reviewCount }} {{ reviewCount === 1 ? 'review' : 'reviews' }}</p>
-                            </div>
-                        </div>
-
-                        <!-- Rating Breakdown -->
-                        <div class="mb-6 space-y-2">
-                            <div v-for="star in [5, 4, 3, 2, 1]" :key="star" class="flex items-center gap-2 text-sm">
-                                <span class="w-8 text-gray-600">{{ star }} ★</span>
-                                <div class="h-2 flex-1 rounded-full bg-gray-200">
-                                    <div 
-                                        class="h-full rounded-full bg-yellow-400"
-                                        :style="{ width: `${getRatingPercentage(ratingBreakdown[star])}%` }"
-                                    ></div>
-                                </div>
-                                <span class="w-8 text-right text-gray-600">{{ ratingBreakdown[star] }}</span>
-                            </div>
-                        </div>
+                        <!-- Rating Statistics -->
+                        <RatingStatistics
+                            :averageRating="averageRating"
+                            :reviewCount="reviewCount"
+                            :ratingBreakdown="ratingBreakdown"
+                            class="mb-8"
+                        />
 
                         <!-- Review Cards -->
-                        <div class="space-y-4">
-                            <div 
+                        <div class="space-y-6">
+                            <ReviewCard
                                 v-for="review in property.reviews"
                                 :key="review.id"
-                                class="border-t border-gray-200 pt-4"
-                            >
-                                <div class="mb-2 flex items-center justify-between">
-                                    <div class="flex items-center gap-2">
-                                        <div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary-100 text-primary-700">
-                                            {{ review.user.name.charAt(0).toUpperCase() }}
-                                        </div>
-                                        <div>
-                                            <p class="font-semibold text-gray-900">{{ review.user.name }}</p>
-                                            <p class="text-xs text-gray-500">{{ new Date(review.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex gap-0.5 text-yellow-400">
-                                        <svg v-for="i in review.rating" :key="i" class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <p class="text-gray-700">{{ review.comment }}</p>
-                            </div>
+                                :review="review"
+                            />
                         </div>
                     </div>
 

@@ -119,17 +119,34 @@ class PropertyController extends Controller
     /**
      * Display the specified property.
      */
-    public function show(Property $property)
+    public function show(Request $request, Property $property)
     {
-        // Load relationships including reviews
+        // Get sort parameter for reviews
+        $reviewSort = $request->input('review_sort', 'newest');
+
+        // Load relationships including reviews with sorting
         $property->load([
             'images',
             'amenities',
             'user',
-            'reviews' => function ($query) {
-                $query->with('user')
-                    ->latest()
-                    ->limit(10); // Show latest 10 reviews
+            'reviews' => function ($query) use ($reviewSort) {
+                $query->with('user');
+
+                // Apply sorting
+                switch ($reviewSort) {
+                    case 'highest_rated':
+                        $query->orderByDesc('rating')->orderByDesc('created_at');
+                        break;
+                    case 'lowest_rated':
+                        $query->orderBy('rating')->orderByDesc('created_at');
+                        break;
+                    case 'newest':
+                    default:
+                        $query->orderByDesc('created_at');
+                        break;
+                }
+
+                $query->limit(10); // Show latest 10 reviews
             }
         ]);
 
@@ -160,6 +177,7 @@ class PropertyController extends Controller
             'reviewCount' => $reviewCount,
             'ratingBreakdown' => $ratingBreakdown,
             'similarProperties' => $similarProperties,
+            'reviewSort' => $reviewSort,
         ]);
     }
 }
