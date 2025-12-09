@@ -1,16 +1,35 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
+import { ref, onMounted } from 'vue';
+import { Link, Head } from '@inertiajs/vue3';
+import ToastContainer from '@/Components/ToastContainer.vue';
+import { useToast } from '@/Composables/useToast';
 
-defineProps({
+const props = defineProps({
     title: {
         type: String,
         default: 'ShortletNG',
     },
 });
+
+const toastContainerRef = ref(null);
+const { setContainer } = useToast();
+
+onMounted(() => {
+    if (toastContainerRef.value) {
+        setContainer(toastContainerRef.value);
+    }
+});
 </script>
 
 <template>
+    <Head>
+        <title>{{ title }} | ShortletNG</title>
+        <meta name="description" content="Discover and book amazing short-term rentals in Nigeria" />
+    </Head>
+
     <div class="min-h-screen bg-gray-50">
+        <!-- Toast Container -->
+        <ToastContainer ref="toastContainerRef" />
         <!-- Header -->
         <header class="bg-white shadow-sm">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -1,8 +1,13 @@
 <script setup>
+import { Head } from '@inertiajs/vue3';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import Button from '@/Components/Button.vue';
 import Input from '@/Components/Input.vue';
+import LoadingSpinner from '@/Components/LoadingSpinner.vue';
 import { useForm } from '@inertiajs/vue3';
+import { useToast } from '@/Composables/useToast';
+
+const { error: showError } = useToast();
 
 const form = useForm({
     email: '',
@@ -13,11 +18,22 @@ const form = useForm({
 const submit = () => {
     form.post(window.route('login'), {
         onFinish: () => form.reset('password'),
+        onError: (errors) => {
+            const firstError = Object.values(errors)[0];
+            if (firstError) {
+                showError(firstError);
+            }
+        },
     });
 };
 </script>
 
 <template>
+    <Head>
+        <title>Login | ShortletNG</title>
+        <meta name="description" content="Sign in to your ShortletNG account to manage bookings and discover amazing properties" />
+    </Head>
+    
     <GuestLayout>
         <div class="flex min-h-[calc(100vh-16rem)] items-center justify-center px-4 py-12">
             <div class="w-full max-w-md">
@@ -116,8 +132,17 @@ const submit = () => {
                         </div>
 
                         <!-- Submit Button -->
-                        <Button type="submit" variant="primary" class="w-full" :disabled="form.processing">
-                            {{ form.processing ? 'Signing in...' : 'Sign In' }}
+                        <Button 
+                            type="submit" 
+                            variant="primary" 
+                            class="w-full" 
+                            :disabled="form.processing"
+                        >
+                            <span v-if="form.processing" class="flex items-center justify-center gap-2">
+                                <LoadingSpinner size="small" />
+                                Signing in...
+                            </span>
+                            <span v-else>Sign In</span>
                         </Button>
                     </form>
 
