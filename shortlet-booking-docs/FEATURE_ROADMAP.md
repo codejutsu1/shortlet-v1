@@ -380,14 +380,14 @@
 **Git Commit**: `Implement review system backend with eligibility checks`
 
 ### 7.3 Review Display
-- [ ] Create review list component
-- [ ] Add review card design
-- [ ] Display star rating visually
-- [ ] Add reviewer name and date
-- [ ] Add review photos (if uploaded)
-- [ ] Add "verified booking" badge
-- [ ] Implement review sorting (newest, highest rated)
-- [ ] Add review statistics (rating distribution)
+- [x] Create review list component
+- [x] Add review card design
+- [x] Display star rating visually
+- [x] Add reviewer name and date
+- [ ] Add review photos (if uploaded) - SKIPPED (optional for MVP)
+- [x] Add "verified booking" badge
+- [x] Implement review sorting (newest, highest rated, lowest rated)
+- [x] Add review statistics (rating distribution)
 
 **Git Commit**: `Create review display components and statistics`
 
