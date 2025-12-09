@@ -28,6 +28,12 @@
         <env name="MAIL_MAILER" value="array"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>
+        <env name="PAYSTACK_PUBLIC_KEY" value="pk_test_dummy"/>
+        <env name="PAYSTACK_SECRET_KEY" value="sk_test_dummy"/>
+        <env name="FLUTTERWAVE_PUBLIC_KEY" value="FLWPUBK_TEST-dummy"/>
+        <env name="FLUTTERWAVE_SECRET_KEY" value="FLWSECK_TEST-dummy"/>
+        <env name="FLUTTERWAVE_ENCRYPTION_KEY" value="FLWSECK_TESTdummy"/>
+        <env name="PAYMENT_PROVIDER" value="paystack"/>
         <env name="PULSE_ENABLED" value="false"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
         <env name="NIGHTWATCH_ENABLED" value="false"/>
