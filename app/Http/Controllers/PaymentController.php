@@ -59,9 +59,22 @@ class PaymentController extends Controller
                 'status' => 'pending',
             ]);
 
+            Log::info('Payment initialized successfully', [
+                'booking_id' => $booking->id,
+                'amount' => $booking->total_price,
+                'reference' => $response->reference,
+                'provider' => $this->paymentManager->getProviderName()
+            ]);
+
             // Redirect to payment gateway checkout
             return redirect($response->authorizationUrl);
         }
+
+        Log::error('Payment initialization failed', [
+            'booking_id' => $booking->id,
+            'provider' => $this->paymentManager->getProviderName(),
+            'error' => $response->message ?? 'Unknown error'
+        ]);
 
         return back()->withErrors(['error' => $response->message ?? 'Failed to initialize payment. Please try again.']);
     }

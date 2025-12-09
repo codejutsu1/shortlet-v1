@@ -7,6 +7,7 @@ use App\Models\Property;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class BookingController extends Controller
@@ -79,6 +80,16 @@ class BookingController extends Controller
             'status' => 'pending',
         ]);
 
+        Log::info('Booking created successfully', [
+            'booking_id' => $booking->id,
+            'user_id' => Auth::id(),
+            'property_id' => $property->id,
+            'check_in' => $validated['check_in'],
+            'check_out' => $validated['check_out'],
+            'total_price' => $totalPrice,
+            'nights' => $nights
+        ]);
+
         return redirect()->route('bookings.show', $booking)
             ->with('success', 'Booking created successfully!');
     }
@@ -116,6 +127,13 @@ class BookingController extends Controller
         }
 
         $booking->update(['status' => 'cancelled']);
+
+        Log::info('Booking cancelled', [
+            'booking_id' => $booking->id,
+            'user_id' => Auth::id(),
+            'property_id' => $booking->property_id,
+            'refund_amount' => $booking->total_price
+        ]);
 
         return redirect()->route('bookings.index')
             ->with('success', 'Booking cancelled successfully.');
