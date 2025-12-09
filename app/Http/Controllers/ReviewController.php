@@ -73,13 +73,13 @@ class ReviewController extends Controller
             return back()->withErrors(['message' => 'You can only review after your checkout date.']);
         }
 
-        // Create review
+        // Create review with sanitized input (prevent XSS)
         $review = Review::create([
             'user_id' => auth()->id(),
             'property_id' => $booking->property_id,
             'booking_id' => $booking->id,
             'rating' => $validated['rating'],
-            'comment' => $validated['comment'],
+            'comment' => strip_tags($validated['comment']), // Remove HTML tags
         ]);
 
         // Log review creation
