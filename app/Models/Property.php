@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Services\PropertyCacheService;
 
 class Property extends Model
 {
@@ -60,6 +61,20 @@ class Property extends Model
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
+    }
+
+    // Model Events
+
+    protected static function booted()
+    {
+        // Clear property cache when properties are created, updated, or deleted
+        static::saved(function () {
+            app(PropertyCacheService::class)->clearPropertyListCache();
+        });
+
+        static::deleted(function () {
+            app(PropertyCacheService::class)->clearPropertyListCache();
+        });
     }
 
     // Query Scopes

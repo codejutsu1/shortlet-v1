@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Property;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use App\Services\PropertyCacheService;
 use Inertia\Inertia;
 
 class PropertyController extends Controller
@@ -13,15 +15,17 @@ class PropertyController extends Controller
      */
     public function homepage()
     {
-        // Get featured properties or fallback to recent active properties
-        $featuredProperties = Property::where('status', 'active')
-            ->where(function ($query) {
-                $query->where('is_featured', true)
-                    ->orWhere('created_at', '>=', now()->subDays(30));
-            })
-            ->with(['images' => fn($q) => $q->where('is_primary', true)->orWhereNull('is_primary')->orderBy('is_primary', 'desc')])
-            ->limit(8)
-            ->get();
+        // Cache featured properties for 1 hour
+        $featuredProperties = Cache::remember('homepage:featured', 3600, function () {
+            return Property::where('status', 'active')
+                ->where(function ($query) {
+                    $query->where('is_featured', true)
+                        ->orWhere('created_at', '>=', now()->subDays(30));
+                })
+                ->with(['images' => fn($q) => $q->where('is_primary', true)->orWhereNull('is_primary')->orderBy('is_primary', 'desc')])
+                ->limit(8)
+                ->get();
+        });
 
         return Inertia::render('Welcome', [
             'featuredProperties' => $featuredProperties,
@@ -33,61 +37,70 @@ class PropertyController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Property::query()
-            ->with(['images', 'amenities'])
-            ->where('status', 'active');
+        // Generate cache key based on filters
+        $filters = $request->only(['city', 'min_price', 'max_price', 'guests', 'amenities', 'sort_by']);
+        $page = $request->input('page', 1);
+        $cacheService = app(PropertyCacheService::class);
+        $cacheKey = $cacheService->generateListingCacheKey($filters, $page);
 
-        // Filter by city
-        if ($request->filled('city')) {
-            $query->where('city', $request->city);
-        }
+        // Cache property listings for 1 hour
+        $properties = Cache::remember($cacheKey, 3600, function () use ($request) {
+            $query = Property::query()
+                ->with(['images', 'amenities'])
+                ->where('status', 'active');
 
-        // Filter by price range
-        if ($request->filled('min_price')) {
-            $query->where('price_per_night', '>=', $request->min_price);
-        }
-        if ($request->filled('max_price')) {
-            $query->where('price_per_night', '<=', $request->max_price);
-        }
-
-        // Filter by guest count
-        if ($request->filled('guests')) {
-            $query->where('max_guests', '>=', $request->guests);
-        }
-
-        // Filter by amenities (all selected amenities must be present)
-        if ($request->filled('amenities')) {
-            $amenityIds = is_array($request->amenities)
-                ? $request->amenities
-                : explode(',', $request->amenities);
-
-            foreach ($amenityIds as $amenityId) {
-                $query->whereHas('amenities', function ($q) use ($amenityId) {
-                    $q->where('amenities.id', $amenityId);
-                });
+            // Filter by city
+            if ($request->filled('city')) {
+                $query->where('city', $request->city);
             }
-        }
 
-        // Sorting
-        $sortBy = $request->input('sort_by', 'newest');
-        switch ($sortBy) {
-            case 'price_low':
-                $query->orderBy('price_per_night', 'asc');
-                break;
-            case 'price_high':
-                $query->orderBy('price_per_night', 'desc');
-                break;
-            case 'rating':
-                $query->withAvg('reviews', 'rating')
-                    ->orderByDesc('reviews_avg_rating');
-                break;
-            case 'newest':
-            default:
-                $query->orderByDesc('created_at');
-                break;
-        }
+            // Filter by price range
+            if ($request->filled('min_price')) {
+                $query->where('price_per_night', '>=', $request->min_price);
+            }
+            if ($request->filled('max_price')) {
+                $query->where('price_per_night', '<=', $request->max_price);
+            }
 
-        $properties = $query->paginate(12)->withQueryString();
+            // Filter by guest count
+            if ($request->filled('guests')) {
+                $query->where('max_guests', '>=', $request->guests);
+            }
+
+            // Filter by amenities (all selected amenities must be present)
+            if ($request->filled('amenities')) {
+                $amenityIds = is_array($request->amenities)
+                    ? $request->amenities
+                    : explode(',', $request->amenities);
+
+                foreach ($amenityIds as $amenityId) {
+                    $query->whereHas('amenities', function ($q) use ($amenityId) {
+                        $q->where('amenities.id', $amenityId);
+                    });
+                }
+            }
+
+            // Sorting
+            $sortBy = $request->input('sort_by', 'newest');
+            switch ($sortBy) {
+                case 'price_low':
+                    $query->orderBy('price_per_night', 'asc');
+                    break;
+                case 'price_high':
+                    $query->orderBy('price_per_night', 'desc');
+                    break;
+                case 'rating':
+                    $query->withAvg('reviews', 'rating')
+                        ->orderByDesc('reviews_avg_rating');
+                    break;
+                case 'newest':
+                default:
+                    $query->orderByDesc('created_at');
+                    break;
+            }
+
+            return $query->paginate(12)->withQueryString();
+        });
 
         // Get filter options
         $cities = Property::where('status', 'active')
